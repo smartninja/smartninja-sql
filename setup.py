@@ -10,7 +10,7 @@ setuptools.setup(
     author_email='matej.ramuta@gmail.com',
     packages=['smartninja_sql'],
     install_requires=[],
-    version='0.1',
+    version='0.2',
     license='MIT',
     description='SmartNinja SQL - a simple SQLite wrapper.',
     long_description=long_description,

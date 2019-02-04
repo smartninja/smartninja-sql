@@ -25,7 +25,7 @@ from smartninja_sql.sqlite import SQLiteDatabase
 	
 db = SQLiteDatabase()
 	
-db.query("""CREATE TABLE IF NOT EXISTS User (
+db.execute("""CREATE TABLE IF NOT EXISTS User (
             id integer PRIMARY KEY AUTOINCREMENT, 
             name text NOT NULL, 
             age integer);""")
@@ -61,11 +61,11 @@ db.print_tables(verbose=True)
 
 ### Queries
 
-Database queries are done using the `.query()` method:
+Database statements are executed using the `.execute()` method:
 
 ```python
 # create table
-db.query("""CREATE TABLE IF NOT EXISTS User (
+db.execute("""CREATE TABLE IF NOT EXISTS User (
             id integer PRIMARY KEY AUTOINCREMENT, 
             name text NOT NULL, 
             age integer);""")
@@ -73,20 +73,20 @@ db.query("""CREATE TABLE IF NOT EXISTS User (
 db.print_tables(verbose=True)
 
 # alter (edit) table
-db.query("ALTER TABLE User ADD email TEXT;")
+db.execute("ALTER TABLE User ADD email TEXT;")
 db.print_tables(verbose=True)  # the table has a new field: email
 
 # insert data into a table
-db.query("INSERT INTO User (name, age, email) VALUES ('Matt', 31, 'matt@example.org')")
-db.query("INSERT INTO User (name, age, email) VALUES ('Nina', 25, 'nina@example.org')")
+db.execute("INSERT INTO User (name, age, email) VALUES ('Matt', 31, 'matt@example.org')")
+db.execute("INSERT INTO User (name, age, email) VALUES ('Nina', 25, 'nina@example.org')")
 
 # get data (select) and print it
-print(db.query("SELECT * FROM User;"))
-print(db.query("SELECT * FROM User WHERE age=25;"))
-print(db.query("SELECT * FROM User WHERE age=26;"))
+print(db.execute("SELECT * FROM User;"))
+print(db.execute("SELECT * FROM User WHERE age=25;"))
+print(db.execute("SELECT * FROM User WHERE age=26;"))
 ```
 
-If you're familiar with the `sqlite3` library, the `query()` method returns the `.fetchall()` result.
+If you're familiar with the `sqlite3` library, this method returns the `.fetchall()` result.
 
 ### Connection and cursor
 

@@ -9,7 +9,7 @@ class SQLiteDatabase:
         except sqlite3.Error as e:
             print(e)
 
-    def query(self, *args, **kwargs):
+    def execute(self, *args, **kwargs):
         try:
             query = self.cursor.execute(*args, **kwargs)
             self.conn.commit()
