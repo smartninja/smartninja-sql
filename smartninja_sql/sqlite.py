@@ -1,5 +1,7 @@
 import sqlite3
 
+from prettytable import PrettyTable
+
 
 class SQLiteDatabase:
     def __init__(self, name=":memory:"):
@@ -10,10 +12,42 @@ class SQLiteDatabase:
             print(e)
 
     def execute(self, *args, **kwargs):
+        """
+        Example: db.execute(SELECT * FROM User)
+        :param args:
+        :param kwargs:
+        :return:
+        """
         try:
             query = self.cursor.execute(*args, **kwargs)
             self.conn.commit()
             return query.fetchall()
+        except sqlite3.Error as e:
+            print(e)
+            return None
+
+    def pretty_print(self, *args, **kwargs):
+        """
+        Example: db.pretty_print(SELECT * FROM User)
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        try:
+            query = self.cursor.execute(*args, **kwargs)
+            self.conn.commit()
+            rows = query.fetchall()
+
+            field_names = query.description
+
+            table = PrettyTable(field_names=[header[0] for header in field_names])
+
+            for row in rows:
+                table.add_row(row)
+
+            print(table)
+
+            return rows
         except sqlite3.Error as e:
             print(e)
             return None

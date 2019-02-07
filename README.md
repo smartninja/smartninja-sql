@@ -14,7 +14,9 @@ This is a pip package:
 
 	pip install smartninja-sql
 
-The package does not have any dependencies. It is compatible with Python 3 only.
+The package has one dependency, `prettytable`. It installs it automatically.
+
+The package requires Python 3 (does not work with Python 2).
 
 ## Usage
 
@@ -87,6 +89,15 @@ print(db.execute("SELECT * FROM User WHERE age=26;"))
 ```
 
 If you're familiar with the `sqlite3` library, this method returns the `.fetchall()` result.
+
+### Pretty print
+
+The `.pretty_print()` method does the same as the `.execute()` method, except that it also prints the data in a nice 
+table in the Terminal (using the `prettytable` package).
+
+```python
+db.pretty_print("SELECT * FROM User;")
+```
 
 ### Connection and cursor
 
